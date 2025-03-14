@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScholarAI - Scholarship Finder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ScholarAI</h1>
+            <p>Find Personalized Scholarship Opportunities</p>
+        </header>
+        <section class="form-section">
+            <h2>Enter Your Information</h2>
+            <form method="POST">
+                <div class="input-group">
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                </div>
+                <div class="input-group">
+                    <label for="gpa">Your GPA:</label>
+                    <input type="number" id="gpa" name="gpa" required step="0.1" min="0" max="4.0" placeholder="Enter your GPA">
+                </div>
+                <div class="input-group">
+                    <label for="study_field">Field of Study:</label>
+                    <input type="text" id="study_field" name="study_field" required placeholder="Enter your field of study">
+                </div>
+                <div class="input-group">
+                    <label for="study_area">Study Area/Location:</label>
+                    <input type="text" id="study_area" name="study_area" required placeholder="Enter the study location">
+                </div>
+                <button type="submit" class="submit-btn" id="submitBtn">Get Scholarships</button>
+            </form>
+        </section>
+
+        <div id="loadingIndicator" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>  Generating Results...</p>
+        </div>
+
+        {% if scholarships %}
+            <section class="results">
+                <h2>Scholarship Opportunities</h2>
+                <div class="output">
+                    {{ scholarships | safe }}
+                </div>
+            </section>
+        {% endif %}
+
+        {% if advice %}
+            <section class="advice">
+                <h2>Personalized Advice</h2>
+                <div class="output">
+                    {{ advice | safe }}
+                </div>
+            </section>
+        {% endif %}
+    </div>
+
+    <script>
+        document.getElementById("submitBtn").addEventListener("click", function() {
+            // Show the loading spinner when the user submits the form
+            document.getElementById("loadingIndicator").style.display = "flex";
+        });
+    </script>
+</body>
+</html>
