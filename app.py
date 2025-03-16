@@ -4,7 +4,7 @@ import os
 # Load environment variables from .env
 load_dotenv()  
 
-GOOGLE_API_KEY = os.getenv("AIzaSyA9peu78Cso7WthH7lfXhzn0zDDOfujTmw")  # Load API key securely
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")  # Retrieve the API key securely
 
 from flask import Flask, render_template, request
 import google.generativeai as genai
